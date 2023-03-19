@@ -1,0 +1,320 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 12.9 (Ubuntu 12.9-2.pgdg20.04+1)
+-- Dumped by pg_dump version 12.9 (Ubuntu 12.9-2.pgdg20.04+1)
+
+
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+DROP DATABASE universe;
+--
+-- Name: universe; Type: DATABASE; Schema: -; Owner: freecodecamp
+--
+
+CREATE DATABASE universe WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'C.UTF-8' LC_CTYPE = 'C.UTF-8';
+
+
+ALTER DATABASE universe OWNER TO freecodecamp;
+
+\connect universe
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: connection_table; Type: TABLE; Schema: public; Owner: freecodecamp
+--
+
+CREATE TABLE public.connection_table (
+    galaxy_id integer NOT NULL,
+    moon_id integer NOT NULL,
+    planet_id integer NOT NULL,
+    start_id integer NOT NULL,
+    connection_table_id integer NOT NULL,
+    name character varying(55)
+);
+
+
+ALTER TABLE public.connection_table OWNER TO freecodecamp;
+
+--
+-- Name: galaxy; Type: TABLE; Schema: public; Owner: freecodecamp
+--
+
+CREATE TABLE public.galaxy (
+    galaxy_id integer NOT NULL,
+    name character varying(50),
+    description text,
+    has_life boolean,
+    age_in_millions_of_years numeric,
+    planet_types text,
+    dist_from_earth_in_lightyears integer NOT NULL,
+    number_of_solar_systems_in_bilions integer NOT NULL
+);
+
+
+ALTER TABLE public.galaxy OWNER TO freecodecamp;
+
+--
+-- Name: moon; Type: TABLE; Schema: public; Owner: freecodecamp
+--
+
+CREATE TABLE public.moon (
+    moon_id integer NOT NULL,
+    name character varying(55),
+    description text,
+    planet_id integer NOT NULL,
+    is_sperical boolean
+);
+
+
+ALTER TABLE public.moon OWNER TO freecodecamp;
+
+--
+-- Name: planet; Type: TABLE; Schema: public; Owner: freecodecamp
+--
+
+CREATE TABLE public.planet (
+    planet_id integer NOT NULL,
+    name character varying(55),
+    description text,
+    has_moon boolean,
+    star_id integer NOT NULL
+);
+
+
+ALTER TABLE public.planet OWNER TO freecodecamp;
+
+--
+-- Name: star; Type: TABLE; Schema: public; Owner: freecodecamp
+--
+
+CREATE TABLE public.star (
+    star_id integer NOT NULL,
+    description character varying(250),
+    galaxy_id integer,
+    has_planets boolean,
+    name character varying(50) NOT NULL
+);
+
+
+ALTER TABLE public.star OWNER TO freecodecamp;
+
+--
+-- Data for Name: connection_table; Type: TABLE DATA; Schema: public; Owner: freecodecamp
+--
+
+INSERT INTO public.connection_table VALUES (1, 2, 5, 1, 3, 'BIG NAME SYSTEM');
+INSERT INTO public.connection_table VALUES (2, 3, 5, 1, 2, 'LARGE STAR SYSTEM');
+INSERT INTO public.connection_table VALUES (5, 8, 10, 11, 4, 'SMALL SHIELD SYSTEM');
+INSERT INTO public.connection_table VALUES (2, 4, 5, 7, 5, 'TINY STAR SYSTEM');
+
+
+--
+-- Data for Name: galaxy; Type: TABLE DATA; Schema: public; Owner: freecodecamp
+--
+
+INSERT INTO public.galaxy VALUES (1, 'abicus', 'Small spiral galxy with gase cloud and is home to many solar systems. Some of these solar systems have planets that are inhabitable.', true, 20, 'gas gaints,water worlds,earth like planets', 40, 2);
+INSERT INTO public.galaxy VALUES (2, 'benedict', 'Big long egg shaped galaxy with a small amount of solar systems. The solar systems  are mostly unihabitable and hot.', true, 2, 'Hot temp planets,desert planets,earth like planets,molten lava planets', 1000, 1);
+INSERT INTO public.galaxy VALUES (3, 'chamberlain galaxy', 'Star shaped galaxy with many water worlds that are not inhabitable but the moons of some planets are habitable.', true, 200, 'water worlds,desert planets, hot lava planets.', 200, 1);
+INSERT INTO public.galaxy VALUES (4, 'darius galaxy', 'Double circle shaped galaxy. This galaxy is unique in its shape and is habitable. This galaxy has lush green planets with earth like oceans.', true, 1, 'Earth like planets with oceans. Each planet has more than one moon.', 19, 10);
+INSERT INTO public.galaxy VALUES (5, 'Falcon Rio galaxy', ' This galaxy is home to only 100 planets and 50 moons. Thereis only one habitable planet there and it is the largest planet named Zachnoom Foob.', true, 19, 'water worlds,gas gaints.', 2019, 1);
+INSERT INTO public.galaxy VALUES (6, 'Echo Delta galaxy', 'This galaxy is oval shaped and is filled with gas gaints.', false, 5, 'gas gaints', 90, 5);
+
+
+--
+-- Data for Name: moon; Type: TABLE DATA; Schema: public; Owner: freecodecamp
+--
+
+INSERT INTO public.moon VALUES (1, 'Alpha pi', 'Small moon with lush vegetation.', 1, true);
+INSERT INTO public.moon VALUES (2, 'Alpha gamma', 'Medium sized moon with many lakes.', 1, true);
+INSERT INTO public.moon VALUES (3, 'Beta zeta', 'Large moon with tropical rainforest and no oceans.', 1, true);
+INSERT INTO public.moon VALUES (4, 'Canton Jo', 'Tiny moon with a harsh enviroment. Most of the land is desert.', 1, true);
+INSERT INTO public.moon VALUES (5, 'Straffon zif', 'Moon that is primarily water and small islands.', 1, true);
+INSERT INTO public.moon VALUES (6, 'Zettan', 'Moon with a moon and high gravity on the planet.', 2, true);
+INSERT INTO public.moon VALUES (7, 'Vector 1', 'Moon that is covered with ice and volcanos.', 3, true);
+INSERT INTO public.moon VALUES (8, 'Vector 2', 'Moon with volcanos and oceans.', 3, true);
+INSERT INTO public.moon VALUES (9, 'Tantoon', 'This moon is covered with liquid nitrogen and is very cold.', 4, true);
+INSERT INTO public.moon VALUES (10, 'Gradius', 'Land of two suns. This moon orbits around two suns and is very hot.The sun never sets on this planet.', 5, true);
+INSERT INTO public.moon VALUES (11, 'Pan Pan zoe', 'This moon has lush vegetaion and is covevered with many oceans.', 6, true);
+INSERT INTO public.moon VALUES (12, 'BooJo Bantan', 'This moon is all  molten lava.', 7, true);
+INSERT INTO public.moon VALUES (13, 'Ziff tan', 'Cold water world with desert islands.', 8, true);
+INSERT INTO public.moon VALUES (14, 'Foo Foon', 'Large moon with light gravity.Light water floats here.', 8, true);
+INSERT INTO public.moon VALUES (15, 'Beanafa', 'Very hot molten moon.', 9, true);
+INSERT INTO public.moon VALUES (16, 'Loona', 'Moon with no oceans.', 10, true);
+INSERT INTO public.moon VALUES (17, 'diamond', 'Moon with mountains of diamonds.', 11, false);
+INSERT INTO public.moon VALUES (18, 'Canvassoon', ' Moon with open field and no mountians.', 12, true);
+INSERT INTO public.moon VALUES (19, 'Zadok', 'Moon with one island and on large ocean.', 13, true);
+INSERT INTO public.moon VALUES (20, 'Green phana', 'Lush moon with many rivers and no oceans.', 5, false);
+
+
+--
+-- Data for Name: planet; Type: TABLE DATA; Schema: public; Owner: freecodecamp
+--
+
+INSERT INTO public.planet VALUES (1, 'albolon', 'Hot water world with low gravity.High tides rise 50ft and low tide drops 100ft.', true, 1);
+INSERT INTO public.planet VALUES (2, 'Boolean', 'Planet with two moons orbiting and one moon orbits the other moon.This planet is wet among the equater and dry on the north and south poles.', true, 2);
+INSERT INTO public.planet VALUES (3, 'Chilean', 'Planet with lush vegetation and no oceans. Has dinosaurs and robots that live on the planet.Is a space tourist colony.', true, 1);
+INSERT INTO public.planet VALUES (4, 'dilion', 'Earth like planet with lots of likes and mountians. It rains every night for 2 years straight and has lush vegetation.', true, 2);
+INSERT INTO public.planet VALUES (5, 'Ectorn', 'Desert planet with big rollie pollies and armadilos.The planet is home to reptile farmers and armadillo hearders.', true, 1);
+INSERT INTO public.planet VALUES (6, 'Falcon 9', 'This planet is named so because it has 9 species of falcons and all are miniture creatures.This planet is lush and green with plenty of water falls and flowers.', true, 2);
+INSERT INTO public.planet VALUES (7, 'Gigantica Flores', 'This planet is home to giant sized flowers and vegetation. The people who live here are forest dwellers and eat plants only.', true, 2);
+INSERT INTO public.planet VALUES (8, 'Helka', 'This land is full of gold and daimonds.Most of the visiters to this planet are miners.The planet has lots of mountains and lakes.', true, 3);
+INSERT INTO public.planet VALUES (9, 'Iggyland', 'Land of the lizards and lush forest.', true, 4);
+INSERT INTO public.planet VALUES (10, 'julius', 'Land of many fountains and springs.', true, 5);
+INSERT INTO public.planet VALUES (11, 'Kelis', 'Land of a thousand deserts.', true, 6);
+INSERT INTO public.planet VALUES (12, 'eggyland', 'Home to lizards and rainforest.', true, 1);
+INSERT INTO public.planet VALUES (13, 'Julius', 'Great grassy plains and beautiful lakes.', true, 2);
+INSERT INTO public.planet VALUES (14, 'helis', 'Home of the cattle and birds.', true, 3);
+INSERT INTO public.planet VALUES (15, 'Legoland', 'Home of the lego robots. This land is a desert land with many rivers.', true, 3);
+INSERT INTO public.planet VALUES (16, 'Moorna', 'Land of desert lakes and rivers.', true, 4);
+INSERT INTO public.planet VALUES (17, 'Noonan', 'This is a lush planet with a variety of fruit trees and plants.', true, 6);
+INSERT INTO public.planet VALUES (18, 'Octispus', 'Land of the great lakes.', true, 1);
+INSERT INTO public.planet VALUES (19, 'Quintina', 'Land of many rivers.', true, 5);
+INSERT INTO public.planet VALUES (20, 'Rastana', 'Home of the desert lands.', true, 1);
+
+
+--
+-- Data for Name: star; Type: TABLE DATA; Schema: public; Owner: freecodecamp
+--
+
+INSERT INTO public.star VALUES (1, 'medium sized star about the size of 100 earths,very hot dwarf star.', 1, true, 'Sirius');
+INSERT INTO public.star VALUES (2, 'small sized star, white dwarf, very hot.', 2, true, 'Rosetta');
+INSERT INTO public.star VALUES (3, 'very large star, hot star, less dense.', 3, true, 'Big bernie');
+INSERT INTO public.star VALUES (4, 'cold gaint star, generates less heat', 4, true, 'Crystalis');
+INSERT INTO public.star VALUES (5, 'big red star, red dwarf,very hot, new star.', 5, true, 'Funky red');
+INSERT INTO public.star VALUES (6, 'medium sized star,cooling star, at the end of its life.', 6, true, 'hitchconon');
+
+
+--
+-- Name: connection_table connection_table_connection_id_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.connection_table
+    ADD CONSTRAINT connection_table_connection_id_key UNIQUE (connection_table_id);
+
+
+--
+-- Name: connection_table connection_table_pkey; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.connection_table
+    ADD CONSTRAINT connection_table_pkey PRIMARY KEY (connection_table_id);
+
+
+--
+-- Name: galaxy galaxy_galaxy_id_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.galaxy
+    ADD CONSTRAINT galaxy_galaxy_id_key UNIQUE (galaxy_id);
+
+
+--
+-- Name: galaxy galaxy_pkey; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.galaxy
+    ADD CONSTRAINT galaxy_pkey PRIMARY KEY (galaxy_id);
+
+
+--
+-- Name: moon moon_name_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.moon
+    ADD CONSTRAINT moon_name_key UNIQUE (name);
+
+
+--
+-- Name: moon moon_pkey; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.moon
+    ADD CONSTRAINT moon_pkey PRIMARY KEY (moon_id);
+
+
+--
+-- Name: planet planet_name_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.planet
+    ADD CONSTRAINT planet_name_key UNIQUE (name);
+
+
+--
+-- Name: planet planet_pkey; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.planet
+    ADD CONSTRAINT planet_pkey PRIMARY KEY (planet_id);
+
+
+--
+-- Name: star star_name_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.star
+    ADD CONSTRAINT star_name_key UNIQUE (name);
+
+
+--
+-- Name: star star_pkey; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.star
+    ADD CONSTRAINT star_pkey PRIMARY KEY (star_id);
+
+
+--
+-- Name: moon moon_planet_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.moon
+    ADD CONSTRAINT moon_planet_id_fkey FOREIGN KEY (planet_id) REFERENCES public.planet(planet_id);
+
+
+--
+-- Name: planet planet_star_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.planet
+    ADD CONSTRAINT planet_star_id_fkey FOREIGN KEY (star_id) REFERENCES public.star(star_id);
+
+
+--
+-- Name: star star_galaxy_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.star
+    ADD CONSTRAINT star_galaxy_id_fkey FOREIGN KEY (galaxy_id) REFERENCES public.galaxy(galaxy_id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
